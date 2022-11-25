@@ -171,8 +171,9 @@ export function buildSchema<U extends AnyParamConstructor<any>>(
 
 /**
  * Add a Class-Model Pair to the Typegoose Cache
+ *
  * This can be used to add custom Models to Typegoose, with the type information of "cl"
- * Note: no guarrantee that the type information is fully correct when used manually
+ * Note: no guarantee that the type information is fully correct when used manually
  * @param model The Model to store
  * @param cl The Class to store
  * @param options Overwrite existingMongoose or existingConnection
@@ -189,8 +190,8 @@ export function addModelToTypegoose<U extends AnyParamConstructor<any>, QueryHel
   model: mongoose.Model<any>,
   cl: U,
   options?: { existingMongoose?: mongoose.Mongoose; existingConnection?: any }
-) {
-  const mongooseModel = options?.existingMongoose?.Model || options?.existingConnection?.base?.Model || mongoose.Model;
+): ReturnModelType<U, QueryHelpers> {
+  const mongooseModel: mongoose.Model<any> = options?.existingMongoose?.Model || options?.existingConnection?.base?.Model || mongoose.Model;
 
   assertion(model.prototype instanceof mongooseModel, new NotValidModelError(model, 'addModelToTypegoose.model'));
   assertionIsClass(cl);
@@ -283,6 +284,7 @@ export function deleteModelWithClass<U extends AnyParamConstructor<any>>(cl: U) 
 
 /**
  * Build a Model from the given Class and add it as a discriminator onto "from"
+ *
  * @param from The Model to add the new discriminator model to
  * @param cl The Class to make a discriminator model from
  * @param options Overwrite ModelOptions (Merged with ModelOptions from class)

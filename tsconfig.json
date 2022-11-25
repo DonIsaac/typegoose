@@ -9,6 +9,7 @@
     "moduleResolution": "node",
     "newLine": "LF",
     "declaration": true,
+    "declarationDir": "lib/types",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowJs": false,
